@@ -425,3 +425,4 @@ export default function CaseStudyModal({ project, isOpen, onClose, openerRef }) 
     </dialog>
   );
 }
+

@@ -511,3 +511,4 @@ export default function ProjectArtwork({ variant = 'statement', className = '', 
 
   return null;
 }
+

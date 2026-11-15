@@ -85,7 +85,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
     setAnimating(true);
     setAnimationDone(false);
 
-    // Remove animation classes once the entire sequence completes (at ~2.6s)
+    // Remove animation classes once the entire sequence completes
     const timer = setTimeout(() => {
       setAnimationDone(true);
       setAnimating(false);
@@ -180,7 +180,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
     setGlowPos({ x: x * 100, y: y * 100, visible: true });
 
     // Center-cover normalized face region
-    const inFace = x >= 0.40 && x <= 0.79 && y >= 0.075 && y <= 0.86;
+    const inFace = x >= 0.40 && x <= 0.79 && y >= 0.075 && y <= 0.75;
     setIsFaceHovered(inFace);
   }, [isNavOpen]);
 
@@ -291,12 +291,50 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         </a>
       </header>
 
-      {/* Layer 2: Main Title & Typography */}
+      {/* Layer 2: Main Title & Typography Positioned at the BOTTOM */}
       <div className="hero-content-wrapper container-inset">
         {/* Hidden screen-reader accessible heading */}
         <h1 className="sr-only">Tarun Rawat — Full-Stack Web Developer &amp; Digital Designer</h1>
 
-        {/* Main Title Container */}
+        {/* Subtitle Row with Down Arrow Link */}
+        <div
+          className={`hero-subtitle-row ${animating ? 'fade-element' : ''}`}
+          style={{ '--fade-delay': '1.18s' }}
+        >
+          <div className="subtitle-left">
+            FULL-STACK WEB DEVELOPER &amp; DIGITAL DESIGNER
+          </div>
+
+          {/* Bouncing Down-Arrow Link to #about */}
+          <div className="hero-down-arrow-container">
+            <a
+              href="#about"
+              className="hero-down-arrow-btn"
+              onClick={handleScrollToAbout}
+              aria-label="Scroll down to Approach"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="arrow-icon"
+                aria-hidden="true"
+              >
+                <line x1="12" y1="4" x2="12" y2="19" />
+                <polyline points="5 12 12 19 19 12" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="subtitle-right">
+            [ PORTFOLIO // SELECTED WORK ]
+          </div>
+        </div>
+
+        {/* Main Title Container: Anchored at the Bottom */}
         <div className="hero-title-container" aria-hidden="true">
           {/* Left Monogram: JR */}
           <div className="title-monogram">
@@ -353,43 +391,6 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           </div>
         </div>
 
-        {/* Subtitle Row */}
-        <div
-          className={`hero-subtitle-row ${animating ? 'fade-element' : ''}`}
-          style={{ '--fade-delay': '1.18s' }}
-        >
-          <div className="subtitle-left">
-            FULL-STACK WEB DEVELOPER &amp; DIGITAL DESIGNER
-          </div>
-          <div className="subtitle-right">
-            [ PORTFOLIO // SELECTED WORK ]
-          </div>
-        </div>
-
-        {/* Bouncing Down-Arrow Link to #about */}
-        <div className="hero-down-arrow-container">
-          <a
-            href="#about"
-            className="hero-down-arrow-btn"
-            onClick={handleScrollToAbout}
-            aria-label="Scroll down to Approach"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="arrow-icon"
-              aria-hidden="true"
-            >
-              <line x1="12" y1="4" x2="12" y2="19" />
-              <polyline points="5 12 12 19 19 12" />
-            </svg>
-          </a>
-        </div>
-
         {/* Lower Content: Left Practice Statement & Right Explore Work CTA */}
         <div className="hero-bottom-row">
           <div
@@ -441,7 +442,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           inset: 0;
           background-image: url('/images/hero-portrait.webp');
           background-size: cover;
-          background-position: 60% center;
+          background-position: 60% 25%;
           background-repeat: no-repeat;
         }
 
@@ -465,7 +466,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
             180deg,
             rgba(0, 0, 0, 0.5) 0%,
             rgba(0, 0, 0, 0) 35%,
-            rgba(0, 0, 0, 0.5) 100%
+            rgba(0, 0, 0, 0.65) 100%
           );
           pointer-events: none;
         }
@@ -553,7 +554,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           min-height: 50px;
         }
 
-        /* Hero Content & Title */
+        /* Hero Content & Typography Placed at the BOTTOM */
         .hero-content-wrapper {
           position: relative;
           z-index: 2;
@@ -561,22 +562,92 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           height: 100%;
           display: flex;
           flex-direction: column;
-          padding-top: 147px;
+          justify-content: flex-end;
+          padding-top: 100px;
+          padding-bottom: 34px;
           container-type: inline-size;
         }
 
+        /* Subtitle Row Above Title */
+        .hero-subtitle-row {
+          margin-bottom: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          font-family: var(--font-utility);
+          font-size: 13px;
+          letter-spacing: 0.08em;
+          color: #ffffff;
+          text-transform: uppercase;
+        }
+
+        .subtitle-right {
+          color: var(--muted-mid);
+        }
+
+        /* Center Down Arrow Button in Subtitle Row */
+        .hero-down-arrow-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-down-arrow-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.6);
+          background-color: rgba(0, 0, 0, 0.45);
+          color: #ffffff;
+          text-decoration: none;
+          transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+        }
+
+        .hero-down-arrow-btn:hover,
+        .hero-down-arrow-btn:focus-visible {
+          background-color: var(--accent);
+          border-color: var(--accent);
+          color: #000000;
+        }
+
+        .arrow-icon {
+          width: 22px;
+          height: 22px;
+          animation: arrowBounce 1.9s var(--ease-bounce) infinite;
+        }
+
+        .hero-down-arrow-btn:hover .arrow-icon,
+        .hero-down-arrow-btn:focus .arrow-icon {
+          animation-play-state: paused;
+        }
+
+        @keyframes arrowBounce {
+          0%, 70%, 100% {
+            transform: translateY(-3px);
+          }
+          35% {
+            transform: translateY(5px);
+          }
+        }
+
+        /* Main Title Container at Bottom */
         .hero-title-container {
           display: flex;
           align-items: baseline;
           justify-content: space-between;
           width: 100%;
           gap: 3%;
-          padding-right: 28px; /* reserve space for superscript */
+          padding-right: 28px;
           font-family: var(--font-display);
           font-size: clamp(40px, 14.2cqw, 205px);
           line-height: 0.727;
           letter-spacing: -0.06em;
           white-space: nowrap;
+          margin-bottom: 22px;
         }
 
         .title-monogram {
@@ -643,79 +714,8 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           }
         }
 
-        /* Subtitle Row */
-        .hero-subtitle-row {
-          margin-top: 35px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          font-family: var(--font-utility);
-          font-size: 13px;
-          letter-spacing: 0.08em;
-          color: #ffffff;
-          text-transform: uppercase;
-        }
-
-        .subtitle-right {
-          color: var(--muted-mid);
-        }
-
-        /* Down Arrow Button */
-        .hero-down-arrow-container {
-          position: relative;
-          width: 100%;
-          margin-top: 26px;
-          display: flex;
-          justify-content: flex-start;
-          padding-left: 70%;
-        }
-
-        .hero-down-arrow-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 52px;
-          height: 52px;
-          border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.6);
-          background-color: rgba(0, 0, 0, 0.32);
-          color: #ffffff;
-          text-decoration: none;
-          transition: background-color 0.25s, border-color 0.25s, color 0.25s;
-        }
-
-        .hero-down-arrow-btn:hover,
-        .hero-down-arrow-btn:focus-visible {
-          background-color: var(--accent);
-          border-color: var(--accent);
-          color: #000000;
-        }
-
-        .arrow-icon {
-          width: 25px;
-          height: 25px;
-          animation: arrowBounce 1.9s var(--ease-bounce) infinite;
-        }
-
-        .hero-down-arrow-btn:hover .arrow-icon,
-        .hero-down-arrow-btn:focus .arrow-icon {
-          animation-play-state: paused;
-        }
-
-        @keyframes arrowBounce {
-          0%, 70%, 100% {
-            transform: translateY(-3px);
-          }
-          35% {
-            transform: translateY(5px);
-          }
-        }
-
         /* Bottom Row */
         .hero-bottom-row {
-          margin-top: auto;
-          margin-bottom: 40px;
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
@@ -725,7 +725,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         .hero-bottom-statement {
           max-width: 440px;
           font-family: var(--font-body);
-          font-size: 18px;
+          font-size: 17px;
           line-height: 1.45;
         }
 
@@ -735,7 +735,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
 
         .statement-line-2 {
           color: var(--muted-text);
-          margin-top: 4px;
+          margin-top: 3px;
         }
 
         .hero-explore-pill {
@@ -746,7 +746,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         .hero-vertical-label {
           position: absolute;
           right: 3%;
-          top: 52%;
+          top: 38%;
           transform: rotate(90deg);
           transform-origin: right top;
           font-family: var(--font-utility);
@@ -825,7 +825,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
             font-size: 11px;
           }
           .hero-bottom-statement {
-            font-size: 16px;
+            font-size: 15px;
           }
           .hero-vertical-label {
             display: none;
@@ -833,18 +833,16 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         }
 
         @media (max-width: 700px) {
-          .hero-content-wrapper {
-            padding-top: 150px;
-          }
           .hero-title-container {
             font-size: 13.5cqw;
             padding-right: 22px;
+            margin-bottom: 16px;
           }
           .name-superscript {
             font-size: 12px;
           }
           .hero-subtitle-row {
-            margin-top: 24px;
+            margin-bottom: 14px;
             font-size: 10px;
           }
           .subtitle-left {
@@ -852,9 +850,6 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           }
           .subtitle-right {
             max-width: 36%;
-          }
-          .hero-down-arrow-container {
-            padding-left: 60%;
           }
         }
 
@@ -877,32 +872,34 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
             padding: 12px 16px;
             font-size: 15px;
           }
-          .hero-content-wrapper {
-            padding-top: 145px;
+          .hero-subtitle-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
           }
           .hero-down-arrow-container {
-            margin-top: 20px;
-            padding-left: 50%;
+            display: none;
           }
           .hero-down-arrow-btn {
-            width: 46px;
-            height: 46px;
+            width: 40px;
+            height: 40px;
           }
           .arrow-icon {
-            width: 23px;
-            height: 23px;
+            width: 20px;
+            height: 20px;
           }
           .hero-bottom-row {
             flex-direction: column;
             align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 28px;
+            gap: 18px;
           }
           .hero-bottom-statement {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
           }
           .hero-explore-pill {
             margin-bottom: 0;
+            width: 100%;
+            justify-content: center;
           }
         }
 
