@@ -36,7 +36,7 @@ export default function FeaturedProject({ onOpenModal }) {
     return () => observer.disconnect();
   }, []);
 
-  // 3D perspective tilt calculation
+  // Gentle, smooth 3D perspective tilt
   const handlePointerMove = (e) => {
     const isFine = window.matchMedia('(pointer: fine)').matches;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -49,8 +49,9 @@ export default function FeaturedProject({ onOpenModal }) {
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
 
-    const rx = (y - 0.5) * -24.2;
-    const ry = (x - 0.5) * 30.8;
+    // Minimal, refined tilt angles (max ~7-9 deg)
+    const rx = (y - 0.5) * -7.5;
+    const ry = (x - 0.5) * 9.5;
     setTilt({ rx, ry });
   };
 
@@ -340,7 +341,7 @@ export default function FeaturedProject({ onOpenModal }) {
           z-index: 15;
           mix-blend-mode: difference;
           cursor: pointer;
-          transition: transform 0.15s ease-out;
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
           outline: none;
         }
 

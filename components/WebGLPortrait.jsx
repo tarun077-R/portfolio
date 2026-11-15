@@ -40,39 +40,40 @@ void main() {
     uv.x = (uv.x - 0.5) * scale + 0.5;
   }
 
-  // Fluid ripple and distortion calculation
+  // Minimal, silky fluid ripple and distortion
   vec2 totalDisplacement = vec2(0.0);
   float totalGlow = 0.0;
 
-  // Pointer displacement & warm glow
+  // Ultra-subtle pointer displacement & soft warm tint
   vec2 pDiff = v_uv - u_pointer;
   pDiff.x *= canvasAspect;
   float pDist = length(pDiff);
-  float pRipple = sin(pDist * 32.0 - u_time * 6.0) * exp(-pDist * 7.5);
-  totalDisplacement += normalize(pDiff + vec2(0.0001)) * pRipple * 0.02 * u_strength;
-  totalGlow += exp(-pDist * 5.0) * 0.35 * u_strength;
+  float pRipple = sin(pDist * 22.0 - u_time * 3.5) * exp(-pDist * 8.5);
+  // Kept minimal (0.0035) so face features remain crisp and natural
+  totalDisplacement += normalize(pDiff + vec2(0.0001)) * pRipple * 0.0035 * u_strength;
+  totalGlow += exp(-pDist * 6.5) * 0.07 * u_strength;
 
-  // 9 Trailing interaction nodes
+  // Subtle trailing nodes
   for (int i = 0; i < 9; i++) {
     vec2 tDiff = v_uv - u_trail[i];
     tDiff.x *= canvasAspect;
     float tDist = length(tDiff);
     float weight = 1.0 - (float(i) / 9.0);
-    float tRipple = sin(tDist * 28.0 - u_time * 5.0 + float(i) * 0.4) * exp(-tDist * 8.0);
-    totalDisplacement += normalize(tDiff + vec2(0.0001)) * tRipple * (0.014 * weight) * u_strength;
-    totalGlow += exp(-tDist * 6.0) * (0.18 * weight) * u_strength;
+    float tRipple = sin(tDist * 18.0 - u_time * 3.0 + float(i) * 0.3) * exp(-tDist * 9.5);
+    totalDisplacement += normalize(tDiff + vec2(0.0001)) * tRipple * (0.0018 * weight) * u_strength;
+    totalGlow += exp(-tDist * 8.0) * (0.03 * weight) * u_strength;
   }
 
   vec2 distortedUv = uv + totalDisplacement;
 
-  // Restrained red/blue chromatic separation
-  vec2 chromaOffset = totalDisplacement * 0.7;
+  // Restrained, elegant chromatic separation (minimal whisper)
+  vec2 chromaOffset = totalDisplacement * 0.35;
   float r = texture2D(u_image, distortedUv + chromaOffset).r;
   float g = texture2D(u_image, distortedUv).g;
   float b = texture2D(u_image, distortedUv - chromaOffset).b;
   vec3 color = vec3(r, g, b);
 
-  // Burnt-orange / gold trailing glow (#ff630f = rgb(1.0, 0.388, 0.059))
+  // Delicate burnt-orange ambient warmth (#ff630f)
   vec3 orangeAccent = vec3(1.0, 0.388, 0.059) * totalGlow;
   color += orangeAccent;
 
@@ -216,7 +217,7 @@ export default function WebGLPortrait({
       onReady(false);
     };
 
-    // Tracking state
+    // Tracking state with gentle, smooth interpolation
     const currentPointer = { x: 0.5, y: 0.5 };
     const targetPointer = { x: 0.5, y: 0.5 };
     const trail = Array.from({ length: 9 }, () => ({ x: 0.5, y: 0.5 }));
@@ -231,24 +232,24 @@ export default function WebGLPortrait({
 
       const elapsed = (now - startTime) * 0.001;
 
-      // Pointer smoothing
-      currentPointer.x += (targetPointer.x - currentPointer.x) * 0.075;
-      currentPointer.y += (targetPointer.y - currentPointer.y) * 0.075;
+      // Smooth pointer tracking (factor 0.08 for buttery smoothness)
+      currentPointer.x += (targetPointer.x - currentPointer.x) * 0.08;
+      currentPointer.y += (targetPointer.y - currentPointer.y) * 0.08;
 
-      // Trail update
-      trail[0].x += (currentPointer.x - trail[0].x) * 0.19;
-      trail[0].y += (currentPointer.y - trail[0].y) * 0.19;
+      // Soft trail updates
+      trail[0].x += (currentPointer.x - trail[0].x) * 0.16;
+      trail[0].y += (currentPointer.y - trail[0].y) * 0.16;
       for (let i = 1; i < 9; i++) {
-        const factor = 0.19 - i * 0.009;
+        const factor = 0.16 - i * 0.008;
         trail[i].x += (trail[i - 1].x - trail[i].x) * factor;
         trail[i].y += (trail[i - 1].y - trail[i].y) * factor;
       }
 
-      // Strength smoothing
+      // Smooth strength easing (soft ramp in and gentle fade out)
       if (targetStrength > currentStrength) {
-        currentStrength += (targetStrength - currentStrength) * 0.07;
+        currentStrength += (targetStrength - currentStrength) * 0.05;
       } else {
-        currentStrength += (targetStrength - currentStrength) * 0.028;
+        currentStrength += (targetStrength - currentStrength) * 0.02;
       }
 
       if (targetStrength === 0.0 && currentStrength < 0.001) {
@@ -393,4 +394,3 @@ export default function WebGLPortrait({
     />
   );
 }
-

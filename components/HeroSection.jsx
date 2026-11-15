@@ -212,9 +212,9 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
     }
   };
 
-  // Compute background transforms
-  const bgScale = 1 + scrollProgress * 0.2 + (isFaceHovered ? 0.035 : 0);
-  const bgTranslateY = scrollProgress * -7;
+  // Compute background transforms with minimal, refined hover scale
+  const bgScale = 1 + scrollProgress * 0.15 + (isFaceHovered ? 0.015 : 0);
+  const bgTranslateY = scrollProgress * -5;
 
   return (
     <section
@@ -229,7 +229,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         className="hero-bg-container"
         style={{
           transform: `scale(${bgScale}) translateY(${bgTranslateY}%)`,
-          transition: isFaceHovered ? 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' : 'transform 0.3s ease-out'
+          transition: isFaceHovered ? 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)' : 'transform 0.5s ease-out'
         }}
         aria-hidden="true"
       >
@@ -448,14 +448,14 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
 
         .hero-fallback-glow {
           position: absolute;
-          width: 320px;
-          height: 320px;
+          width: 220px;
+          height: 220px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 99, 15, 0.25) 0%, rgba(255, 99, 15, 0) 70%);
+          background: radial-gradient(circle, rgba(255, 99, 15, 0.08) 0%, rgba(255, 99, 15, 0) 70%);
           transform: translate(-50%, -50%);
           pointer-events: none;
           mix-blend-mode: screen;
-          filter: blur(15px);
+          filter: blur(20px);
         }
 
         .hero-overlay {

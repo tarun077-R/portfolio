@@ -240,7 +240,7 @@ export default function ApproachStatement() {
         }
 
         .statement-follower.is-active {
-          opacity: 1;
+          opacity: 0.65;
         }
 
         /* Metadata Row */
