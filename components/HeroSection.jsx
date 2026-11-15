@@ -442,7 +442,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           inset: 0;
           background-image: url('/images/hero-portrait.webp');
           background-size: cover;
-          background-position: 60% 25%;
+          background-position: 60% center;
           background-repeat: no-repeat;
         }
 
