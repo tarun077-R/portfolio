@@ -91,7 +91,7 @@ export default function CaseStudyModal({ project, isOpen, onClose, openerRef }) 
             <p className="modal-summary">{project.summary}</p>
           </div>
 
-          <div className="modal-artwork-container">
+          <div className="modal-artwork-container skeleton-shimmer">
             <ProjectArtwork
               variant={project.coverKey}
               className="modal-artwork-svg"

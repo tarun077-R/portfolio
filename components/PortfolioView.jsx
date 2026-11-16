@@ -1,14 +1,22 @@
 'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
+import dynamic from 'next/dynamic';
 import HeroSection from './HeroSection';
-import NavigationOverlay from './NavigationOverlay';
 import ApproachStatement from './ApproachStatement';
 import FeaturedProject from './FeaturedProject';
 import WorkIndex from './WorkIndex';
 import CapabilitiesList from './CapabilitiesList';
 import ContactSection from './ContactSection';
-import CaseStudyModal from './CaseStudyModal';
+
+// Ponytail dynamic code-splitting: load overlay and modal only when requested
+const NavigationOverlay = dynamic(() => import('./NavigationOverlay'), {
+  ssr: false
+});
+
+const CaseStudyModal = dynamic(() => import('./CaseStudyModal'), {
+  ssr: false
+});
 
 export default function PortfolioView() {
   const [isNavOpen, setIsNavOpen] = useState(false);

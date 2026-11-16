@@ -81,6 +81,8 @@ void main() {
 }
 `;
 
+const textureImageCache = new Map();
+
 export default function WebGLPortrait({
   imageUrl = '/images/hero-portrait.webp',
   onReady = () => {},
@@ -183,16 +185,15 @@ export default function WebGLPortrait({
       uTrailLocations.push(gl.getUniformLocation(program, `u_trail[${i}]`));
     }
 
-    // Texture setup
+    // Texture setup with caching and lazy loading
     const texture = gl.createTexture();
     let imageWidth = 2048;
     let imageHeight = 1152;
     let textureReady = false;
+    let textureLoading = false;
+    let isIntersecting = false;
 
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = imageUrl;
-    img.onload = () => {
+    function initTexture(img) {
       if (!gl || gl.isContextLost()) return;
       imageWidth = img.naturalWidth || 2048;
       imageHeight = img.naturalHeight || 1152;
@@ -209,13 +210,54 @@ export default function WebGLPortrait({
       setIsSupported(true);
       onReady(true);
       requestRender();
-    };
+    }
 
-    img.onerror = () => {
-      console.warn('Failed to load WebGL texture image:', imageUrl);
-      setIsSupported(false);
-      onReady(false);
-    };
+    function loadTexture() {
+      if (textureReady || textureLoading) return;
+      textureLoading = true;
+
+      if (textureImageCache.has(imageUrl)) {
+        const cachedImg = textureImageCache.get(imageUrl);
+        if (cachedImg && cachedImg.complete && cachedImg.naturalWidth > 0) {
+          initTexture(cachedImg);
+          return;
+        }
+      }
+
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.decoding = 'async';
+      img.src = imageUrl;
+      img.onload = () => {
+        textureImageCache.set(imageUrl, img);
+        initTexture(img);
+      };
+      img.onerror = () => {
+        console.warn('Failed to load WebGL texture image:', imageUrl);
+        setIsSupported(false);
+        onReady(false);
+      };
+    }
+
+    // Lazy load observer: only ingest texture when within 250px of viewport
+    const viewportObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isIntersecting = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            loadTexture();
+            if (targetStrength > 0 || currentStrength > 0) {
+              requestRender();
+            }
+          } else {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            isRunning = false;
+          }
+        });
+      },
+      { rootMargin: '250px' }
+    );
+    viewportObserver.observe(canvas);
 
     // Tracking state with gentle, smooth interpolation
     const currentPointer = { x: 0.5, y: 0.5 };
@@ -228,7 +270,10 @@ export default function WebGLPortrait({
     let isRunning = false;
 
     function render(now) {
-      if (!gl || gl.isContextLost() || !textureReady) return;
+      if (!isIntersecting || !gl || gl.isContextLost() || !textureReady) {
+        isRunning = false;
+        return;
+      }
 
       const elapsed = (now - startTime) * 0.001;
 
@@ -365,6 +410,7 @@ export default function WebGLPortrait({
       document.removeEventListener('visibilitychange', handleVisibility);
       canvas.removeEventListener('webglcontextlost', handleContextLost);
       resizeObserver.disconnect();
+      viewportObserver.disconnect();
 
       if (gl) {
         gl.deleteBuffer(positionBuffer);

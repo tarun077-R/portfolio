@@ -55,6 +55,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/images/hero-portrait.webp"
+          as="image"
+          type="image/webp"
+        />
+      </head>
       <body>
         {/* Accessible Skip Link */}
         <a href="#work" className="skip-link">
@@ -66,6 +74,19 @@ export default function RootLayout({ children }) {
 
         {/* Page Content */}
         {children}
+
+        {/* Zero-overhead Service Worker registration for offline & image caching */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').catch(function() {});
+                });
+              }
+            `
+          }}
+        />
       </body>
     </html>
   );

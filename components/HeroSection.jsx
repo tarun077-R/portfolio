@@ -15,39 +15,48 @@ function renderLetters(word, baseDelay, step = 0.08) {
   ));
 }
 
-export default function HeroSection({ onOpenNav, isNavOpen }) {
-  const heroRef = useRef(null);
-  const [timeString, setTimeString] = useState('--:--:--');
-  const [gmtString, setGmtString] = useState('GMT+00:00 • LOCAL');
-  const [isClient, setIsClient] = useState(false);
-  const [webglReady, setWebGLReady] = useState(false);
-  const [isFaceHovered, setIsFaceHovered] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [glowPos, setGlowPos] = useState({ x: 50, y: 50, visible: false });
+function HeroClock() {
+  const [timeState, setTimeState] = useState({
+    gmt: 'GMT+00:00 • LOCAL',
+    time: '--:--:--'
+  });
 
-  // Clock Hydration & updates
   useEffect(() => {
-    setIsClient(true);
-
     function updateClock() {
       const now = new Date();
       const h = String(now.getHours()).padStart(2, '0');
       const m = String(now.getMinutes()).padStart(2, '0');
       const s = String(now.getSeconds()).padStart(2, '0');
-      setTimeString(`${h}:${m}:${s}`);
-
       const offsetMinutes = -now.getTimezoneOffset();
       const sign = offsetMinutes >= 0 ? '+' : '-';
       const absMinutes = Math.abs(offsetMinutes);
       const offH = String(Math.floor(absMinutes / 60)).padStart(2, '0');
       const offM = String(absMinutes % 60).padStart(2, '0');
-      setGmtString(`GMT${sign}${offH}:${offM} • LOCAL`);
+      setTimeState({
+        gmt: `GMT${sign}${offH}:${offM} • LOCAL`,
+        time: `${h}:${m}:${s}`
+      });
     }
 
     updateClock();
     const intervalId = setInterval(updateClock, 1000);
     return () => clearInterval(intervalId);
   }, []);
+
+  return (
+    <div className="nav-clock" aria-label="Local Time">
+      <div className="nav-clock-gmt">{timeState.gmt}</div>
+      <div className="nav-clock-time">{timeState.time}</div>
+    </div>
+  );
+}
+
+export default function HeroSection({ onOpenNav, isNavOpen }) {
+  const heroRef = useRef(null);
+  const [webglReady, setWebGLReady] = useState(false);
+  const [isFaceHovered, setIsFaceHovered] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [glowPos, setGlowPos] = useState({ x: 50, y: 50, visible: false });
 
   // Scroll parallax calculation
   useEffect(() => {
@@ -123,6 +132,9 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         }}
         aria-hidden="true"
       >
+        {/* Editorial Skeleton Shimmer while WebGL and texture load */}
+        <div className={`hero-portrait-skeleton skeleton-shimmer ${webglReady ? 'is-hidden' : ''}`} />
+
         <div className="hero-portrait-css" />
 
         <WebGLPortrait
@@ -142,10 +154,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
 
       {/* Navigation Header */}
       <header className="hero-nav container-inset" style={{ animation: 'navDrop 0.5s ease-out forwards' }}>
-        <div className="nav-clock" aria-label="Local Time">
-          <div className="nav-clock-gmt">{isClient ? gmtString : 'GMT+00:00 • LOCAL'}</div>
-          <div className="nav-clock-time">{isClient ? timeString : '--:--:--'}</div>
-        </div>
+        <HeroClock />
 
         <button
           type="button"

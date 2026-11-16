@@ -116,6 +116,7 @@ export default function FeaturedProject({ onOpenModal }) {
         aria-label="View Student E-Library case study"
       >
         <div className="featured-card-inner">
+          {!inView && <div className="featured-card-skeleton skeleton-shimmer" aria-hidden="true" />}
           <ProjectArtwork variant="elibrary" className="featured-artwork-svg" />
         </div>
       </button>
