@@ -418,10 +418,20 @@ body.scroll-locked {
 .hero-portrait-css {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background-image: url('/images/hero-portrait.webp');
   background-size: cover;
   background-position: 60% center;
   background-repeat: no-repeat;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .hero-fallback-glow {
@@ -2142,7 +2152,7 @@ body.scroll-locked {
 .hero-portrait-skeleton {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 3;
   background: radial-gradient(circle at 60% 40%, #1a1a1a 0%, #0e0e0e 55%, #050505 100%);
   pointer-events: none;
   opacity: 1;

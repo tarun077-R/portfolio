@@ -54,9 +54,22 @@ function HeroClock() {
 export default function HeroSection({ onOpenNav, isNavOpen }) {
   const heroRef = useRef(null);
   const [webglReady, setWebGLReady] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [isFaceHovered, setIsFaceHovered] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [glowPos, setGlowPos] = useState({ x: 50, y: 50, visible: false });
+
+  // Pre-decode and track portrait image loading for instant presentation
+  useEffect(() => {
+    const img = new Image();
+    img.src = '/images/hero-portrait.webp';
+    if (img.complete && img.naturalWidth > 0) {
+      setImageLoaded(true);
+    } else {
+      img.onload = () => setImageLoaded(true);
+      img.onerror = () => setImageLoaded(true); // Graceful fallback
+    }
+  }, []);
 
   // Scroll parallax calculation
   useEffect(() => {
@@ -133,7 +146,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         aria-hidden="true"
       >
         {/* Editorial Skeleton Shimmer while WebGL and texture load */}
-        <div className={`hero-portrait-skeleton skeleton-shimmer ${webglReady ? 'is-hidden' : ''}`} />
+        <div className={`hero-portrait-skeleton skeleton-shimmer ${imageLoaded || webglReady ? 'is-hidden' : ''}`} />
 
         <div className="hero-portrait-css" />
 

@@ -228,6 +228,13 @@ export default function WebGLPortrait({
       img.crossOrigin = 'anonymous';
       img.decoding = 'async';
       img.src = imageUrl;
+
+      if (img.complete && img.naturalWidth > 0) {
+        textureImageCache.set(imageUrl, img);
+        initTexture(img);
+        return;
+      }
+
       img.onload = () => {
         textureImageCache.set(imageUrl, img);
         initTexture(img);
@@ -239,13 +246,15 @@ export default function WebGLPortrait({
       };
     }
 
-    // Lazy load observer: only ingest texture when within 250px of viewport
+    // Ingest texture immediately for hero portrait
+    loadTexture();
+
+    // Viewport observer: pause rendering loop when scrolled away to save GPU
     const viewportObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           isIntersecting = entry.isIntersecting;
           if (entry.isIntersecting) {
-            loadTexture();
             if (targetStrength > 0 || currentStrength > 0) {
               requestRender();
             }
@@ -255,7 +264,7 @@ export default function WebGLPortrait({
           }
         });
       },
-      { rootMargin: '250px' }
+      { rootMargin: '150px' }
     );
     viewportObserver.observe(canvas);
 
@@ -425,7 +434,7 @@ export default function WebGLPortrait({
   return (
     <canvas
       ref={canvasRef}
-      className={className}
+      className={`hero-canvas ${className}`}
       style={{
         ...style,
         position: 'absolute',
@@ -433,7 +442,8 @@ export default function WebGLPortrait({
         left: 0,
         width: '100%',
         height: '100%',
-        display: isSupported ? 'block' : 'none',
+        opacity: isSupported ? 1 : 0,
+        transition: 'opacity 0.6s ease-out',
         pointerEvents: 'none'
       }}
       aria-hidden="true"

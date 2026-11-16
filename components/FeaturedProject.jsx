@@ -30,13 +30,13 @@ export default function FeaturedProject({ onOpenModal }) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.22) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
             setInView(true);
             observer.disconnect();
           }
         });
       },
-      { threshold: 0.22 }
+      { threshold: 0.1 }
     );
 
     observer.observe(el);
