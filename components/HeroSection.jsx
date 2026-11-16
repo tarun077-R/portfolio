@@ -18,7 +18,7 @@ function renderLetters(word, baseDelay, step = 0.08) {
 export default function HeroSection({ onOpenNav, isNavOpen }) {
   const heroRef = useRef(null);
   const [timeString, setTimeString] = useState('--:--:--');
-  const [gmtString, setGmtString] = useState('GMT+00:00 // LOCAL');
+  const [gmtString, setGmtString] = useState('GMT+00:00 • LOCAL');
   const [isClient, setIsClient] = useState(false);
   const [webglReady, setWebGLReady] = useState(false);
   const [isFaceHovered, setIsFaceHovered] = useState(false);
@@ -41,7 +41,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
       const absMinutes = Math.abs(offsetMinutes);
       const offH = String(Math.floor(absMinutes / 60)).padStart(2, '0');
       const offM = String(absMinutes % 60).padStart(2, '0');
-      setGmtString(`GMT${sign}${offH}:${offM} // LOCAL`);
+      setGmtString(`GMT${sign}${offH}:${offM} • LOCAL`);
     }
 
     updateClock();
@@ -143,7 +143,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
       {/* Navigation Header */}
       <header className="hero-nav container-inset" style={{ animation: 'navDrop 0.5s ease-out forwards' }}>
         <div className="nav-clock" aria-label="Local Time">
-          <div className="nav-clock-gmt">{isClient ? gmtString : 'GMT+00:00 // LOCAL'}</div>
+          <div className="nav-clock-gmt">{isClient ? gmtString : 'GMT+00:00 • LOCAL'}</div>
           <div className="nav-clock-time">{isClient ? timeString : '--:--:--'}</div>
         </div>
 
@@ -206,7 +206,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
           </div>
 
           <div className="subtitle-right">
-            [ PORTFOLIO // SELECTED WORK ]
+            [ PORTFOLIO — SELECTED WORK ]
           </div>
         </div>
 

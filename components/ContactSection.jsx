@@ -47,7 +47,7 @@ export default function ContactSection() {
       <div className="section-divider" aria-hidden="true" />
 
       <div className="contact-header">
-        <span className="section-kicker">// Contact</span>
+        <span className="section-kicker">Contact</span>
       </div>
 
       <div className="contact-title-wrap">
@@ -132,7 +132,7 @@ export default function ContactSection() {
         </div>
 
         <div className="footer-disclosure">
-          Portfolio — {PERSONA.firstName} {PERSONA.lastName} // {PERSONA.role}.
+          Portfolio — {PERSONA.firstName} {PERSONA.lastName} — {PERSONA.role}.
         </div>
       </footer>
     </section>

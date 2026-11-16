@@ -73,8 +73,8 @@ export default function FeaturedProject({ onOpenModal }) {
       <div className="section-divider" aria-hidden="true" />
 
       <div className="featured-header">
-        <span className="section-kicker">// Featured Project</span>
-        <span className="featured-header-meta">LIVE WEB APPLICATION // 2026</span>
+        <span className="section-kicker">Featured Project</span>
+        <span className="featured-header-meta">LIVE WEB APPLICATION — 2026</span>
       </div>
 
       <div className="featured-title-wrap">

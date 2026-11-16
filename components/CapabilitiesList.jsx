@@ -67,7 +67,7 @@ export default function CapabilitiesList() {
         </div>
 
         <div className="capabilities-kicker-wrap">
-          <span className="section-kicker">// CAPABILITIES</span>
+          <span className="section-kicker">CAPABILITIES</span>
         </div>
       </div>
 

@@ -68,7 +68,7 @@ export default function CaseStudyModal({ project, isOpen, onClose, openerRef }) 
         {/* Sticky Toolbar */}
         <div className="modal-sticky-toolbar">
           <span className="modal-toolbar-badge">
-            CASE STUDY // {project.id} — {project.year}
+            CASE STUDY — {project.id} • {project.year}
           </span>
           <button
             type="button"

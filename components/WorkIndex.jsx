@@ -37,7 +37,7 @@ export default function WorkIndex({ onOpenModal }) {
       className="work-section container-inset-work"
     >
       <div className="work-header">
-        <span className="section-kicker">// Selected Work</span>
+        <span className="section-kicker">Selected Work</span>
         <span className="work-header-meta">SELECTED BUILDS / 2025–2026</span>
       </div>
 

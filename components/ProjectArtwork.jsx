@@ -71,7 +71,7 @@ export default function ProjectArtwork({ variant = 'statement', className = '', 
         <line x1="36" y1="120" x2="564" y2="120" stroke="#333333" strokeWidth="1" />
         <line x1="36" y1="600" x2="564" y2="600" stroke="#333333" strokeWidth="1" />
 
-        <text x="56" y="72" fill="#ff630f" fontSize="12" fontFamily="monospace" letterSpacing="0.2em">TR // ARCHITECTURE & MANIFESTO</text>
+        <text x="56" y="72" fill="#ff630f" fontSize="12" fontFamily="monospace" letterSpacing="0.2em">TR — ARCHITECTURE & MANIFESTO</text>
         <text x="56" y="96" fill="#ffffff" fontSize="16" fontFamily="sans-serif" fontWeight="600" letterSpacing="-0.02em">STRUCTURE &amp; EXPRESSION</text>
         <text x="544" y="72" fill="#777777" fontSize="11" fontFamily="monospace" textAnchor="end">SPEC 2026.1</text>
         <circle cx="536" cy="92" r="4" fill="#ff630f" />
@@ -102,7 +102,7 @@ export default function ProjectArtwork({ variant = 'statement', className = '', 
           <text x="240" y="360" fill="#888888" fontSize="10" fontFamily="monospace" textAnchor="middle">CORE::0.998 LATENCY</text>
         </g>
 
-        <text x="56" y="632" fill="#ffffff" fontSize="13" fontFamily="sans-serif" fontWeight="500">CLEAR ARCHITECTURE // RIGOROUS VISUAL SYSTEMS</text>
+        <text x="56" y="632" fill="#ffffff" fontSize="13" fontFamily="sans-serif" fontWeight="500">CLEAR ARCHITECTURE — RIGOROUS VISUAL SYSTEMS</text>
         <text x="56" y="654" fill="#888888" fontSize="11" fontFamily="monospace">DETERMINISTIC DATA • RESILIENT FLOW • ZERO COMPROMISE</text>
         <text x="544" y="644" fill="#ff630f" fontSize="14" fontFamily="monospace" fontWeight="bold" textAnchor="end">[ 01 ]</text>
       </svg>
@@ -124,9 +124,9 @@ export default function ProjectArtwork({ variant = 'statement', className = '', 
         <CardFrame
           idPrefix={idPrefix}
           title="STUDENT E-LIBRARY"
-          kicker="CATALOG ARCHITECTURE // BUILD 2026"
+          kicker="CATALOG ARCHITECTURE — BUILD 2026"
           nodeId="NODE ID: ELIB-01"
-          footerTitle="STUDENT E-LIBRARY // ACADEMIC RESOURCE PLATFORM"
+          footerTitle="STUDENT E-LIBRARY — ACADEMIC RESOURCE PLATFORM"
           footerMeta="LIVE AT: STUDENT-E-LIBRARY.NETLIFY.APP • NETLIFY CI/CD • ACCESSIBLE ARCHITECTURE"
           index="01"
         >
@@ -201,9 +201,9 @@ export default function ProjectArtwork({ variant = 'statement', className = '', 
         <CardFrame
           idPrefix={idPrefix}
           title="TRENDKART"
-          kicker="COMMERCE ENGINE // ADMIN ARCHITECTURE"
+          kicker="COMMERCE ENGINE — ADMIN ARCHITECTURE"
           nodeId="NODE ID: TK-02"
-          footerTitle="TRENDKART // E-COMMERCE ADMINISTRATIVE SYSTEM"
+          footerTitle="TRENDKART — E-COMMERCE ADMINISTRATIVE SYSTEM"
           footerMeta="NEXT.js • NEXTAUTH V5 • CLOUDINARY • RAZORPAY • DISPATCH TRACKING"
           index="02"
         >
@@ -264,9 +264,9 @@ export default function ProjectArtwork({ variant = 'statement', className = '', 
         <CardFrame
           idPrefix={idPrefix}
           title="FOCUSVAULT"
-          kicker="FINANCIAL DISCIPLINE // PWA ENGINE"
+          kicker="FINANCIAL DISCIPLINE — PWA ENGINE"
           nodeId="NODE ID: FV-03"
-          footerTitle="FOCUSVAULT // PROGRESSIVE WEB APPLICATION (PWA)"
+          footerTitle="FOCUSVAULT — PROGRESSIVE WEB APPLICATION (PWA)"
           footerMeta="PRISMA ORM • SQLITE • DAILY BUDGET ENGINE • MINDFUL FRICTION INTERFACE"
           index="03"
         >

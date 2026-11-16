@@ -70,7 +70,7 @@ export default function ApproachStatement() {
       <div className="section-divider" aria-hidden="true" />
 
       <div className="approach-header">
-        <span className="section-kicker">// Approach</span>
+        <span className="section-kicker">Approach</span>
       </div>
 
       <div className="statement-wrapper" aria-label="Engineering & design approach statement">
