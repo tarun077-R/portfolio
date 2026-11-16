@@ -4,4 +4,6 @@ out/
 build/
 .DS_Store
 *.log
+scratch/
+
 
