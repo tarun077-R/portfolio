@@ -1453,6 +1453,478 @@ body.scroll-locked {
 }
 
 /* ==========================================================================
+   Work Experience Section
+   ========================================================================== */
+.experience-section {
+  position: relative;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 70px;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+}
+
+.experience-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 50px;
+  gap: 24px;
+}
+
+.experience-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.experience-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  line-height: 1.05;
+}
+
+.experience-header-meta {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--muted-mid);
+  text-transform: uppercase;
+}
+
+.experience-cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.experience-card {
+  background-color: #0a0a0a;
+  border: 1px solid #222222;
+  border-radius: 4px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.experience-card:hover {
+  border-color: rgba(255, 99, 15, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+.experience-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.experience-role-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.company-icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background-color: rgba(255, 99, 15, 0.1);
+  border: 1px solid rgba(255, 99, 15, 0.25);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.badge-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.experience-role-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.experience-company-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-utility);
+  font-size: 14px;
+  color: var(--muted-light);
+  margin-top: 4px;
+}
+
+.meta-bullet {
+  color: #444444;
+}
+
+.experience-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: rgba(255, 99, 15, 0.15);
+  border: 1px solid rgba(255, 99, 15, 0.3);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.experience-period-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background-color: #141414;
+  border: 1px solid #282828;
+  font-family: var(--font-utility);
+  font-size: 13px;
+  color: var(--muted-light);
+  letter-spacing: 0.04em;
+}
+
+.calendar-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+.experience-summary {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #b8b8b8;
+  max-width: 860px;
+}
+
+.experience-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.experience-project-item {
+  background-color: #060606;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.experience-project-item:hover {
+  border-color: #333333;
+  transform: translateY(-2px);
+}
+
+.project-item-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.project-item-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-item-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.project-item-category {
+  font-family: var(--font-utility);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.project-live-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: rgba(255, 99, 15, 0.12);
+  border: 1px solid rgba(255, 99, 15, 0.3);
+  color: #ffffff;
+  font-family: var(--font-utility);
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.project-live-btn:hover {
+  background-color: var(--accent);
+  color: #000000;
+}
+
+.external-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.project-contributions-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.contribution-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #cccccc;
+}
+
+.contribution-bullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(255, 99, 15, 0.15);
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.check-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.project-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.tech-pill {
+  font-size: 12px;
+  padding: 4px 10px;
+  background-color: #121212;
+  border-color: #262626;
+  color: #a3a3a3;
+}
+
+.tech-pill:hover {
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Technical Skills Section
+   ========================================================================== */
+.skills-section {
+  position: relative;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 70px;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 50px;
+  gap: 24px;
+}
+
+.skills-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skills-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  line-height: 1.05;
+}
+
+.skills-header-meta {
+  font-family: var(--font-utility);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--muted-mid);
+  text-transform: uppercase;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.skill-category-card {
+  background-color: #0a0a0a;
+  border: 1px solid #222222;
+  border-radius: 4px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.skill-category-card:hover {
+  border-color: rgba(255, 99, 15, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+.category-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.category-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background-color: rgba(255, 99, 15, 0.1);
+  border: 1px solid rgba(255, 99, 15, 0.25);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.category-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.category-index {
+  font-family: var(--font-utility);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.category-description {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted-mid);
+}
+
+.category-groups-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid #1c1c1c;
+  padding-top: 18px;
+}
+
+.skill-subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subgroup-label {
+  font-family: var(--font-utility);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-text);
+  font-weight: 500;
+}
+
+.subgroup-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-pill {
+  font-size: 12px;
+  padding: 5px 12px;
+  background-color: #121212;
+  border-color: #282828;
+  color: #e5e5e5;
+  transition: all 0.2s ease;
+}
+
+.skill-pill:hover {
+  background-color: rgba(255, 99, 15, 0.12);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .experience-projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .experience-card { padding: 24px; }
+  .skill-category-card { padding: 24px; }
+}
+
+@media (max-width: 560px) {
+  .experience-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .skills-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .experience-card-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .project-item-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ==========================================================================
    Capabilities Section
    ========================================================================== */
 .capabilities-section {
@@ -2269,6 +2741,16 @@ body.scroll-locked {
   contain-intrinsic-size: auto 800px;
 }
 
+.experience-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 650px;
+}
+
+.skills-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
+}
+
 .capabilities-section {
   content-visibility: auto;
   contain-intrinsic-size: auto 700px;
@@ -2308,6 +2790,8 @@ body.scroll-locked {
   .approach-section,
   .featured-section,
   .work-section,
+  .experience-section,
+  .skills-section,
   .capabilities-section,
   .contact-section {
     page-break-inside: avoid;

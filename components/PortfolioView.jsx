@@ -7,6 +7,8 @@ import ApproachStatement from './ApproachStatement';
 import FeaturedProject from './FeaturedProject';
 import WorkIndex from './WorkIndex';
 import CapabilitiesList from './CapabilitiesList';
+import WorkExperience from './WorkExperience';
+import TechnicalSkills from './TechnicalSkills';
 import ContactSection from './ContactSection';
 
 // Ponytail dynamic code-splitting: load overlay and modal only when requested
@@ -85,7 +87,13 @@ export default function PortfolioView() {
           onOpenModal={handleOpenCaseStudy}
         />
 
-        {/* Section 5: Capabilities */}
+        {/* Section 5: Experience */}
+        <WorkExperience />
+
+        {/* Section 6: Technical Skills */}
+        <TechnicalSkills />
+
+        {/* Section 7: Capabilities */}
         <CapabilitiesList />
 
         {/* Section 6: Contact */}

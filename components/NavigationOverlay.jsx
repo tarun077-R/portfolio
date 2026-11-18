@@ -5,6 +5,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Work', href: '#work' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
 ];
 

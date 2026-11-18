@@ -94,3 +94,110 @@ export const SERVICES = [
   }
 ];
 
+export const EXPERIENCE = [
+  {
+    id: 'exp-01',
+    company: 'Technogetic',
+    role: 'Software Developer Intern',
+    period: 'September 2026 – Present',
+    badge: 'Active Role',
+    summary: 'Engineering core administrative architectures, multi-tenant workflows, and real-time audio/video communication systems for production web platforms.',
+    projects: [
+      {
+        id: 'proj-hms',
+        title: 'Multi-Tenant Hospital Management System (HMS)',
+        category: 'Enterprise Healthcare Platform',
+        contributions: [
+          'Implemented administrative capabilities allowing secure management and updating of staff email addresses and roles.',
+          'Built administrative controls and logic for medical tests management.',
+          'Conducted rigorous manual testing, bug fixing, and QA across core modules to ensure system stability.'
+        ],
+        techStack: ['Next.js', 'Role-Based Access Control', 'Multi-Tenancy', 'QA & Testing', 'Admin Systems']
+      },
+      {
+        id: 'proj-astro',
+        title: 'Astro Ansh Pandit',
+        category: 'Real-Time Consultation Platform',
+        url: 'https://astroanshpundit.co.in',
+        contributions: [
+          'Integrated a real-time audio/video call system between users and pandits using Agora SDK.',
+          'Developed responsive notification systems, UI fixes, and layout refinements.',
+          'Performed active debugging, component optimization, and state management enhancements.'
+        ],
+        techStack: ['Agora SDK', 'WebRTC', 'Real-Time Audio/Video', 'React.js', 'State Optimization', 'Notifications']
+      }
+    ]
+  }
+];
+
+export const SKILL_CATEGORIES = [
+  {
+    id: 'frontend',
+    title: 'Frontend Development',
+    iconType: 'layout',
+    description: 'High-performance user interfaces, modern component systems, and responsive architectures.',
+    groups: [
+      {
+        name: 'Languages & Core',
+        skills: ['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'SCSS/CSS3']
+      },
+      {
+        name: 'Frameworks & Libraries',
+        skills: ['Next.js (App Router, SSR, Server/Client)', 'React.js', 'Redux Toolkit']
+      },
+      {
+        name: 'Styling & Systems',
+        skills: ['Tailwind CSS', 'shadcn/ui', 'CSS Modules', 'Design Systems']
+      }
+    ]
+  },
+  {
+    id: 'backend',
+    title: 'Backend & APIs',
+    iconType: 'server',
+    description: 'Scalable service architectures, real-time media streams, and robust security protocols.',
+    groups: [
+      {
+        name: 'Runtimes & Frameworks',
+        skills: ['Node.js', 'Express.js']
+      },
+      {
+        name: 'Architecture & Real-Time',
+        skills: ['RESTful APIs', 'Agora SDK (Real-Time Audio/Video)', 'JWT & OTP Authentication']
+      }
+    ]
+  },
+  {
+    id: 'database',
+    title: 'Databases & Storage',
+    iconType: 'database',
+    description: 'Data persistence, schema design, document models, and cloud media asset pipelines.',
+    groups: [
+      {
+        name: 'Databases & ORM',
+        skills: ['MongoDB', 'MongoDB Atlas', 'Mongoose ODM', 'Basic SQL']
+      },
+      {
+        name: 'Cloud Services',
+        skills: ['Cloudinary (Asset Management)']
+      }
+    ]
+  },
+  {
+    id: 'sdlc',
+    title: 'Engineering Process & Tools',
+    iconType: 'workflow',
+    description: 'Rigorous engineering methodologies, automated deployment pipelines, and observability.',
+    groups: [
+      {
+        name: 'Workflow & Methodologies',
+        skills: ['Software Development Life Cycle (SDLC)', 'Agile / Scrum', 'Requirement Analysis', 'Manual Testing', 'Debugging & QA']
+      },
+      {
+        name: 'Tools & Infrastructure',
+        skills: ['Git & GitHub', 'VS Code', 'WSL (Ubuntu)', 'Postman', 'Vercel', 'Netlify', 'Render', 'UptimeRobot']
+      }
+    ]
+  }
+];
+
