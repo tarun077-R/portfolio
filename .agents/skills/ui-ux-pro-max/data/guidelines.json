@@ -1,0 +1,32 @@
+[
+  {
+    "category": "accessibility",
+    "rule": "WCAG 2.2 AA Contrast Compliance",
+    "detail": "Body text must have a minimum contrast ratio of 4.5:1 against the background. Large text (>= 24px regular or >= 18.6px bold) must maintain at least 3:1.",
+    "check": "Always test muted grays (#949494, #aaaaaa) and brand accents (#ff630f) against #000000 backgrounds."
+  },
+  {
+    "category": "accessibility",
+    "rule": "Touch Target Ergonomics",
+    "detail": "Interactive elements must provide an accessible hit area of at least 44px × 44px on touch and mobile devices.",
+    "check": "Ensure buttons, icon toggles, and disclosure triggers meet 44px minimum bounding box or padding."
+  },
+  {
+    "category": "interaction",
+    "rule": "Modal Focus Trap & Inert Background",
+    "detail": "When an overlay or dialog is active, focus must be trapped inside the modal, body scroll locked, and underlying content marked with the HTML inert attribute.",
+    "check": "Ensure Escape key closes modal and returns focus to the trigger element."
+  },
+  {
+    "category": "motion",
+    "rule": "Reduced Motion Respect",
+    "detail": "Honor the user's OS-level motion preference by disabling non-essential keyframe animations and transform transitions.",
+    "check": "Wrap all looping, bouncing, or parallax movements in @media (prefers-reduced-motion: reduce)."
+  },
+  {
+    "category": "performance",
+    "rule": "Modern Content-Visibility Optimization",
+    "detail": "Off-screen below-the-fold sections should use content-visibility: auto with contain-intrinsic-size to skip initial layout and rendering cost.",
+    "check": "Verify all long-scroll sections have explicit contain-intrinsic-size heights to prevent scrollbar jumps."
+  }
+]

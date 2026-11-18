@@ -235,7 +235,7 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
         {/* Main Title Container */}
         <div className="hero-title-container" aria-hidden="true">
           <div className="title-monogram">
-            {renderLetters('JR', 0.38, 0.08)}
+            {renderLetters('TR', 0.38, 0.08)}
           </div>
 
           <div className="title-fullname">

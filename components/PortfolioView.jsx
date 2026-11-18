@@ -41,6 +41,9 @@ export default function PortfolioView() {
   }, []);
 
   const handleCloseCaseStudy = useCallback(() => {
+    document.body.classList.remove('scroll-locked');
+    const mainContent = document.getElementById('main-content');
+    if (mainContent) mainContent.removeAttribute('inert');
     setActiveProject(null);
   }, []);
 
@@ -58,6 +61,7 @@ export default function PortfolioView() {
         isOpen={Boolean(activeProject)}
         onClose={handleCloseCaseStudy}
         openerRef={openerRef}
+        onSelectProject={setActiveProject}
       />
 
       {/* Main Semantic Page Content */}

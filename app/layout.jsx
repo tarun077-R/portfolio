@@ -1,5 +1,6 @@
 import './globals.css';
 import CustomCursor from '../components/CustomCursor';
+import ScrollProgressBar from '../components/ScrollProgressBar';
 
 export const viewport = {
   width: 'device-width',
@@ -49,7 +50,46 @@ export const metadata = {
     description:
       'Custom web applications, digital platforms, and interactive interfaces with clean architecture.',
     images: ['/images/hero-portrait.webp']
+  },
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg'
   }
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://tarunrawat.dev/#person',
+      name: 'Tarun Rawat',
+      jobTitle: 'Full-Stack Web Developer & Digital Designer',
+      email: 'tarunrawat8350@gmail.com',
+      url: 'https://tarunrawat.dev',
+      image: 'https://tarunrawat.dev/images/hero-portrait.webp',
+      sameAs: [
+        'https://www.linkedin.com/in/tarun007-r',
+        'https://github.com/tarun077-R'
+      ],
+      knowsAbout: [
+        'Full-Stack Web Development',
+        'Next.js',
+        'React',
+        'Frontend Architecture',
+        'Digital Interface Design',
+        'Progressive Web Apps'
+      ]
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://tarunrawat.dev/#website',
+      url: 'https://tarunrawat.dev',
+      name: 'Tarun Rawat Portfolio',
+      publisher: { '@id': 'https://tarunrawat.dev/#person' }
+    }
+  ]
 };
 
 export default function RootLayout({ children }) {
@@ -62,6 +102,10 @@ export default function RootLayout({ children }) {
           as="image"
           type="image/webp"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         {/* Accessible Skip Link */}
@@ -69,24 +113,14 @@ export default function RootLayout({ children }) {
           Skip to selected work
         </a>
 
+        {/* Global reading progress indicator */}
+        <ScrollProgressBar />
+
         {/* Global 20px fine-pointer circular custom cursor */}
         <CustomCursor />
 
         {/* Page Content */}
         {children}
-
-        {/* Zero-overhead Service Worker registration for offline & image caching */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js').catch(function() {});
-                });
-              }
-            `
-          }}
-        />
       </body>
     </html>
   );

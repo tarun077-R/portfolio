@@ -1,0 +1,61 @@
+[
+  {
+    "id": "dark-editorial",
+    "name": "Dark Editorial Minimal",
+    "description": "High-fashion, luxury architectural minimalism. Pure black canvas with stark white display typography, fine gray hairline dividers, warm burnt orange accents, and dramatic editorial portraits.",
+    "colors": {
+      "bg": "#000000",
+      "text": "#ffffff",
+      "accent": "#ff630f",
+      "muted": "#949494",
+      "border": "#222222"
+    },
+    "typography": "Semi-condensed geometric display paired with neutral grotesque body and tabular mono utility font.",
+    "geometry": "Square-edged containers with pill-shaped interactive buttons (999px radius).",
+    "motion": "Staggered letter entrances, silky WebGL displacement, minimal smooth cursor tracking."
+  },
+  {
+    "id": "swiss-international",
+    "name": "Swiss International Precision",
+    "description": "Grid-dominant layout rooted in 1950s modernist typography. Objective clarity, stark black and white, strict column rules, bold numerical markers.",
+    "colors": {
+      "bg": "#ffffff",
+      "text": "#111111",
+      "accent": "#ff2a00",
+      "muted": "#666666",
+      "border": "#e5e5e5"
+    },
+    "typography": "Helvetica, Neue Haas Grotesk, or Akzidenz-Grotesk.",
+    "geometry": "Strict rectangular grid, zero border radius.",
+    "motion": "Snap transitions, zero bounce, linear or quick ease-out."
+  },
+  {
+    "id": "modern-bento",
+    "name": "Modern Bento Grid",
+    "description": "Asymmetric multi-cell dashboard layout grouping metrics, interactive tools, and visualizations into modular rounded cards.",
+    "colors": {
+      "bg": "#09090b",
+      "surface": "#18181b",
+      "text": "#fafafa",
+      "accent": "#3b82f6",
+      "border": "#27272a"
+    },
+    "typography": "Inter, Geist, or SF Pro Display.",
+    "geometry": "16px to 24px border radius with 1px border highlights.",
+    "motion": "Smooth spring physics, scale-on-hover."
+  },
+  {
+    "id": "neo-brutalism",
+    "name": "Neo-Brutalism",
+    "description": "High-contrast visual rebellion featuring bold black outlines (2-3px), drop shadows without blur, saturated primary fills, and quirky badges.",
+    "colors": {
+      "bg": "#fef08a",
+      "text": "#000000",
+      "accent": "#f43f5e",
+      "border": "#000000"
+    },
+    "typography": "Heavy slab serif or bold grotesque sans.",
+    "geometry": "Hard-edged or slight 4px radius with 4px black solid shadow.",
+    "motion": "Click down-shift (translate 2px 2px) to simulate mechanical pressing."
+  }
+]

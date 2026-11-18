@@ -70,7 +70,6 @@ export default function WorkIndex({ onOpenModal }) {
                 onBlur={() => setHoveredProject(null)}
                 aria-label={`Open ${proj.title} case study — ${proj.discipline}, ${proj.year}`}
               >
-                <span className="row-hover-wipe" aria-hidden="true" />
                 <span className="row-col-idx">{proj.id}</span>
 
                 <div className="row-col-title-wrap">

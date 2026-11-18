@@ -1,0 +1,38 @@
+[
+  {
+    "category": "editorial",
+    "display": "Mona Sans SemiCondensed (Weights: 250, 500)",
+    "body": "Mona Sans Regular (Weight: 400)",
+    "utility": "PP Neue Montreal or tabular monospace",
+    "scale": {
+      "display": "clamp(40px, 14.2cqw, 205px)",
+      "h1": "clamp(36px, 6vw, 84px)",
+      "h2": "clamp(28px, 4vw, 48px)",
+      "body": "clamp(16px, 1.2vw, 20px)",
+      "caption": "12px - 14px"
+    },
+    "letterSpacing": {
+      "display": "-0.06em",
+      "headings": "-0.04em",
+      "body": "-0.01em",
+      "utility": "0.12em"
+    }
+  },
+  {
+    "category": "technical",
+    "display": "Geist Sans (Weights: 600, 700)",
+    "body": "Geist Sans (Weight: 400)",
+    "utility": "Geist Mono (Weight: 500)",
+    "scale": {
+      "display": "clamp(32px, 5vw, 64px)",
+      "h1": "clamp(28px, 4vw, 48px)",
+      "body": "15px - 16px",
+      "caption": "13px"
+    },
+    "letterSpacing": {
+      "display": "-0.03em",
+      "body": "-0.01em",
+      "utility": "0.05em"
+    }
+  }
+]

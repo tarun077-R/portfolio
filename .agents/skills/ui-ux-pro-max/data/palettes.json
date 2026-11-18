@@ -1,0 +1,46 @@
+[
+  {
+    "domain": "portfolio",
+    "name": "Architectural Noir & Burnt Orange",
+    "background": "#000000",
+    "surface": "#0a0a0a",
+    "text": "#ffffff",
+    "muted": "#949494",
+    "accent": "#ff630f",
+    "border": "#222222",
+    "psychology": "Communicates high craftsmanship, technical mastery, editorial refinement, and deliberate aesthetic judgment."
+  },
+  {
+    "domain": "saas",
+    "name": "Obsidian & Electric Cyan",
+    "background": "#0b0f17",
+    "surface": "#121824",
+    "text": "#f8fafc",
+    "muted": "#94a3b8",
+    "accent": "#06b6d4",
+    "border": "#1e293b",
+    "psychology": "Conveys infrastructure stability, modern cloud performance, and enterprise security."
+  },
+  {
+    "domain": "fintech",
+    "name": "Deep Emerald & Ivory",
+    "background": "#041410",
+    "surface": "#08231c",
+    "text": "#f7fbf9",
+    "muted": "#86a69d",
+    "accent": "#10b981",
+    "border": "#123b30",
+    "psychology": "Evokes capital growth, digital trust, security, and algorithmic precision."
+  },
+  {
+    "domain": "ecommerce",
+    "name": "Warm Sand & Terracotta",
+    "background": "#fdfbf7",
+    "surface": "#ffffff",
+    "text": "#1c1917",
+    "muted": "#78716c",
+    "accent": "#c2410c",
+    "border": "#e7e5e4",
+    "psychology": "Warm, tactile, inviting, and organic, inspiring purchasing confidence and lifestyle elevation."
+  }
+]

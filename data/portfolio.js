@@ -1,7 +1,7 @@
 export const PERSONA = {
   firstName: 'Tarun',
   lastName: 'Rawat',
-  monogram: 'JR',
+  monogram: 'TR',
   role: 'Full-Stack Web Developer & Digital Designer',
   practice: 'Custom web applications, digital platforms, interactive interfaces.',
   email: 'tarunrawat8350@gmail.com',

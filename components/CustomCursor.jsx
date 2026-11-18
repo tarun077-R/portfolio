@@ -4,13 +4,17 @@ import React, { useEffect, useState, useRef } from 'react';
 
 export default function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [isHoveringLink, setIsHoveringLink] = useState(false);
-  const [projectCursor, setProjectCursor] = useState(false);
+  const [cursorState, setCursorState] = useState({
+    visible: false,
+    hovering: false,
+    project: false
+  });
   const cursorRef = useRef(null);
   const posRef = useRef({ x: -100, y: -100 });
   const targetRef = useRef({ x: -100, y: -100 });
   const rafId = useRef(null);
+  const stateRef = useRef(cursorState);
+  stateRef.current = cursorState;
 
   useEffect(() => {
     const finePointer = window.matchMedia('(pointer: fine)').matches;
@@ -25,15 +29,26 @@ export default function CustomCursor() {
 
     function onMouseMove(e) {
       targetRef.current = { x: e.clientX, y: e.clientY };
-      if (!visible) setVisible(true);
-
       const target = e.target;
-      setIsHoveringLink(Boolean(target?.closest('a, button, [role="button"]')));
-      setProjectCursor(Boolean(target?.closest('[data-cursor="project"]')));
+      const isHovering = Boolean(target?.closest('a, button, [role="button"], input, select, textarea'));
+      const isProject = Boolean(target?.closest('[data-cursor="project"]'));
+
+      const current = stateRef.current;
+      if (!current.visible || current.hovering !== isHovering || current.project !== isProject) {
+        setCursorState({
+          visible: true,
+          hovering: isHovering,
+          project: isProject
+        });
+      }
     }
 
-    function onMouseLeave() { setVisible(false); }
-    function onMouseEnter() { setVisible(true); }
+    function onMouseLeave() {
+      setCursorState((prev) => (prev.visible ? { ...prev, visible: false } : prev));
+    }
+    function onMouseEnter() {
+      setCursorState((prev) => (!prev.visible ? { ...prev, visible: true } : prev));
+    }
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
@@ -58,17 +73,17 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', onMouseEnter);
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-  }, [visible]);
+  }, []);
 
-  if (!enabled || !visible) return null;
+  if (!enabled || !cursorState.visible) return null;
 
   return (
     <div
       ref={cursorRef}
-      className={`custom-cursor-root ${projectCursor ? 'is-project' : ''} ${isHoveringLink ? 'is-hovering' : ''}`}
+      className={`custom-cursor-root ${cursorState.project ? 'is-project' : ''} ${cursorState.hovering ? 'is-hovering' : ''}`}
       aria-hidden="true"
     >
-      {projectCursor ? (
+      {cursorState.project ? (
         <div className="cursor-card-badge">
           <span>View</span>
           <span>case study</span>
