@@ -15,7 +15,7 @@ function renderLetters(word, baseDelay, step = 0.08) {
   ));
 }
 
-function HeroClock() {
+export function HeroClock() {
   const [timeState, setTimeState] = useState({
     gmt: 'GMT+00:00 • LOCAL',
     time: '--:--:--'

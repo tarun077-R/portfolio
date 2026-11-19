@@ -284,10 +284,10 @@ body.scroll-locked {
 .nav-scrim {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 80;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: opacity 0.42s var(--ease-reveal);
 }
 
@@ -299,14 +299,17 @@ body.scroll-locked {
   z-index: 90;
   background: linear-gradient(180deg, #181818 0%, #101010 100%);
   border-bottom: 1px solid #333333;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   animation: navPanelSlide 0.42s var(--ease-letter) forwards;
-  height: 507px;
-  padding: 105px 40px 80px;
+  height: auto;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 28px 0 52px;
 }
 
 @keyframes navPanelSlide {
@@ -314,37 +317,49 @@ body.scroll-locked {
   to { opacity: 1; transform: translateY(0); }
 }
 
+.nav-panel-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
 .nav-links-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: 20px;
+  width: 100%;
 }
 
 .nav-link-item {
+  --link-h: 74px;
   text-decoration: none;
   color: #ffffff;
   display: block;
   outline: none;
+  height: var(--link-h);
 }
 
 .nav-link-item:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 8px;
+  border-radius: 4px;
 }
 
 .rolling-word {
   display: inline-flex;
   font-family: var(--font-display);
-  font-size: 96px;
+  font-size: var(--link-h);
   font-weight: 500;
-  line-height: 88px;
-  letter-spacing: -3.84px;
+  line-height: var(--link-h);
+  letter-spacing: -0.04em;
 }
 
 .rolling-char-window {
   display: inline-block;
-  height: 88px;
+  height: var(--link-h);
   overflow: hidden;
   position: relative;
 }
@@ -357,39 +372,66 @@ body.scroll-locked {
 }
 
 .rolling-stack.is-rolled {
-  transform: translateY(-88px);
+  transform: translateY(calc(-1 * var(--link-h)));
+}
+
+.char-front,
+.char-back {
+  display: block;
+  height: var(--link-h);
+  line-height: var(--link-h);
 }
 
 .char-front {
-  display: block;
-  height: 88px;
-  line-height: 88px;
   color: #ffffff;
+  transition: color 0.3s;
 }
 
 .char-back {
-  display: block;
-  height: 88px;
-  line-height: 88px;
   color: var(--accent);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .nav-panel {
-    height: 430px;
-    padding: 80px 24px 60px;
+    padding: 24px 0 44px;
   }
-  .nav-links-container { gap: 28px; }
-  .rolling-word { font-size: 64px; line-height: 64px; letter-spacing: -2px; }
-  .rolling-char-window { height: 64px; }
-  .char-front, .char-back { height: 64px; line-height: 64px; }
-  .rolling-stack.is-rolled { transform: translateY(-64px); }
+  .nav-panel-header {
+    margin-bottom: 28px;
+  }
+  .nav-links-container {
+    gap: 16px;
+  }
+  .nav-link-item {
+    --link-h: 56px;
+  }
+  .rolling-word {
+    letter-spacing: -0.03em;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-panel {
+    padding: 20px 0 36px;
+  }
+  .nav-panel-header {
+    margin-bottom: 20px;
+  }
+  .nav-links-container {
+    gap: 12px;
+  }
+  .nav-link-item {
+    --link-h: 42px;
+  }
+  .rolling-word {
+    letter-spacing: -0.02em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rolling-stack { transition: none !important; }
   .rolling-stack.is-rolled { transform: none !important; }
-  .nav-link-item:hover .char-front { color: var(--accent); }
+  .nav-link-item:hover .char-front,
+  .nav-link-item:focus-visible .char-front { color: var(--accent); }
 }
 
 /* ==========================================================================
@@ -529,12 +571,17 @@ body.scroll-locked {
   background-color: var(--accent);
 }
 
+.nav-menu-btn:hover .menu-btn-label {
+  color: var(--accent);
+}
+
 .menu-btn-label {
   font-family: var(--font-utility);
   font-size: 14px;
   letter-spacing: 0.12em;
   font-weight: 500;
   line-height: 1;
+  transition: color 0.25s var(--ease-reveal);
 }
 
 .nav-talk-pill {

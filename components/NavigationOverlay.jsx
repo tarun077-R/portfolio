@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { HeroClock } from './HeroSection';
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -12,6 +13,7 @@ const NAV_LINKS = [
 
 export default function NavigationOverlay({ isOpen, onClose }) {
   const overlayRef = useRef(null);
+  const closeBtnRef = useRef(null);
   const firstLinkRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -24,7 +26,7 @@ export default function NavigationOverlay({ isOpen, onClose }) {
     if (mainContent) mainContent.setAttribute('inert', '');
 
     const timer = setTimeout(() => {
-      firstLinkRef.current?.focus();
+      closeBtnRef.current?.focus();
     }, 50);
 
     function handleKeyDown(e) {
@@ -58,18 +60,29 @@ export default function NavigationOverlay({ isOpen, onClose }) {
       document.body.classList.remove('scroll-locked');
       if (mainContent) mainContent.removeAttribute('inert');
       window.removeEventListener('keydown', handleKeyDown);
+
+      // Return focus to the opener menu button
+      const openerBtn = document.querySelector('.hero-nav .nav-menu-btn');
+      openerBtn?.focus();
     };
   }, [isOpen, onClose]);
 
   const handleLinkClick = useCallback((e, href) => {
     e.preventDefault();
+    document.body.classList.remove('scroll-locked');
+    const mainContent = document.getElementById('main-content');
+    if (mainContent) mainContent.removeAttribute('inert');
     onClose();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-      target.setAttribute('tabindex', '-1');
-      target.focus({ preventScroll: true });
-    }
+
+    requestAnimationFrame(() => {
+      const target = document.querySelector(href);
+      if (target) {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      }
+    });
   }, [onClose]);
 
   if (!isOpen) return null;
@@ -86,6 +99,39 @@ export default function NavigationOverlay({ isOpen, onClose }) {
         aria-label="Site navigation"
         className="nav-panel"
       >
+        {/* Navigation Panel Top Header Bar */}
+        <div className="nav-panel-header container-inset">
+          <HeroClock />
+
+          <button
+            type="button"
+            className="nav-menu-btn"
+            onClick={onClose}
+            aria-label="Close navigation menu"
+            ref={closeBtnRef}
+          >
+            <div className="menu-bars is-flattened" aria-hidden="true">
+              <span style={{ height: '4px' }} />
+              <span style={{ height: '4px' }} />
+              <span style={{ height: '4px' }} />
+              <span style={{ height: '4px' }} />
+              <span style={{ height: '4px' }} />
+              <span style={{ height: '4px' }} />
+              <span style={{ height: '4px' }} />
+            </div>
+            <span className="menu-btn-label">CLOSE</span>
+          </button>
+
+          <a
+            href="#contact"
+            className="btn-pill-white nav-talk-pill"
+            onClick={(e) => handleLinkClick(e, '#contact')}
+          >
+            Let’s talk ↗
+          </a>
+        </div>
+
+        {/* Navigation Links with Rolling Char Reveal */}
         <div className="nav-links-container">
           {NAV_LINKS.map((link, idx) => {
             const letters = link.label.split('');
