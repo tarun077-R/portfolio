@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import WebGLPortrait from './WebGLPortrait';
+import { PERSONA } from '../data/portfolio';
 
 function renderLetters(word, baseDelay, step = 0.08) {
   return word.split('').map((char, i) => (
@@ -258,13 +259,26 @@ export default function HeroSection({ onOpenNav, isNavOpen }) {
             <p className="statement-line-2">• Independent engineering. Clean architecture. Distinctive execution.</p>
           </div>
 
-          <a
-            href="#work"
-            className="btn-pill-white hero-explore-pill rise-element"
-            style={{ '--rise-delay': '2.0s' }}
-          >
-            Explore work ↘
-          </a>
+          <div className="hero-bottom-actions">
+            <a
+              href={PERSONA.resume || '/resume/Mern_developer.pdf'}
+              download="Tarun_Rawat_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-pill-white hero-resume-pill rise-element"
+              style={{ '--rise-delay': '1.85s' }}
+              aria-label="Download Tarun Rawat's Resume (PDF)"
+            >
+              Resume ↓
+            </a>
+            <a
+              href="#work"
+              className="btn-pill-white hero-explore-pill rise-element"
+              style={{ '--rise-delay': '2.0s' }}
+            >
+              Explore work ↘
+            </a>
+          </div>
         </div>
       </div>
 

@@ -6,6 +6,7 @@ export const PERSONA = {
   practice: 'Custom web applications, digital platforms, interactive interfaces.',
   email: 'tarunrawat8350@gmail.com',
   location: null,
+  resume: '/resume/Mern_developer.pdf',
   socialLinks: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/tarun007-r' },
     { label: 'GitHub', url: 'https://github.com/tarun077-R' }

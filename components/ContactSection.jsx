@@ -97,6 +97,17 @@ export default function ContactSection() {
           </div>
 
           <div className="social-links-row">
+            <a
+              href={PERSONA.resume || '/resume/Mern_developer.pdf'}
+              download="Tarun_Rawat_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              aria-label="Download Tarun Rawat's Resume (PDF)"
+            >
+              <span>Resume</span>
+              <span className="social-arrow" aria-hidden="true">↓</span>
+            </a>
             {PERSONA.socialLinks.map((link) => (
               <a
                 key={link.label}

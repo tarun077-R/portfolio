@@ -744,6 +744,26 @@ body.scroll-locked {
   align-items: flex-end;
   justify-content: space-between;
   width: 100%;
+  gap: 24px;
+}
+
+.hero-bottom-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.hero-resume-pill {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #444444;
+}
+
+.hero-resume-pill:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
 }
 
 .hero-bottom-statement {
@@ -833,7 +853,8 @@ body.scroll-locked {
   .arrow-icon { width: 20px; height: 20px; }
   .hero-bottom-row { flex-direction: column; align-items: flex-start; gap: 18px; }
   .hero-bottom-statement { margin-bottom: 8px; }
-  .hero-explore-pill { width: 100%; justify-content: center; }
+  .hero-bottom-actions { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .hero-bottom-actions .btn-pill-white { width: 100%; justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1544,6 +1565,20 @@ body.scroll-locked {
   text-transform: uppercase;
 }
 
+.experience-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.experience-resume-pill {
+  min-height: 44px;
+  padding: 12px 20px;
+  font-size: 15px;
+}
+
 .experience-cards-wrapper {
   display: flex;
   flex-direction: column;
@@ -1965,7 +2000,9 @@ body.scroll-locked {
 }
 
 @media (max-width: 560px) {
-  .experience-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .experience-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .experience-header-right { align-items: flex-start; width: 100%; gap: 10px; }
+  .experience-resume-pill { width: 100%; justify-content: center; }
   .skills-header { flex-direction: column; align-items: flex-start; gap: 8px; }
   .experience-card-top { flex-direction: column; align-items: flex-start; gap: 12px; }
   .project-item-header { flex-direction: column; align-items: flex-start; gap: 8px; }

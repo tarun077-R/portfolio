@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { EXPERIENCE } from '../data/portfolio';
+import { EXPERIENCE, PERSONA } from '../data/portfolio';
 
 // Minimal inline SVG icons matching site theme
 function BriefcaseIcon({ className = 'w-4 h-4' }) {
@@ -53,7 +53,19 @@ export default function WorkExperience() {
           <span className="section-kicker">Experience</span>
           <h2 className="experience-title">PROFESSIONAL WORK &amp; INTERNSHIPS.</h2>
         </div>
-        <span className="experience-header-meta">PRODUCTION SYSTEMS / 2026</span>
+        <div className="experience-header-right">
+          <span className="experience-header-meta">PRODUCTION SYSTEMS / 2026</span>
+          <a
+            href={PERSONA.resume || '/resume/Mern_developer.pdf'}
+            download="Tarun_Rawat_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-pill-white experience-resume-pill"
+            aria-label="Download Tarun Rawat's Resume (PDF)"
+          >
+            Download Resume ↓
+          </a>
+        </div>
       </div>
 
       {/* Experience Timeline / Cards */}
