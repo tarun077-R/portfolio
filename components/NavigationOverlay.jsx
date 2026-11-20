@@ -15,12 +15,14 @@ export default function NavigationOverlay({ isOpen, onClose }) {
   const overlayRef = useRef(null);
   const closeBtnRef = useRef(null);
   const firstLinkRef = useRef(null);
+  const isNavigatingRef = useRef(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // Focus trap & Escape key listener
   useEffect(() => {
     if (!isOpen) return;
 
+    isNavigatingRef.current = false;
     document.body.classList.add('scroll-locked');
     const mainContent = document.getElementById('main-content');
     if (mainContent) mainContent.setAttribute('inert', '');
@@ -61,14 +63,17 @@ export default function NavigationOverlay({ isOpen, onClose }) {
       if (mainContent) mainContent.removeAttribute('inert');
       window.removeEventListener('keydown', handleKeyDown);
 
-      // Return focus to the opener menu button
-      const openerBtn = document.querySelector('.hero-nav .nav-menu-btn');
-      openerBtn?.focus();
+      // Only return focus to opener if closed without clicking a navigation link
+      if (!isNavigatingRef.current) {
+        const openerBtn = document.querySelector('.hero-nav .nav-menu-btn');
+        openerBtn?.focus();
+      }
     };
   }, [isOpen, onClose]);
 
   const handleLinkClick = useCallback((e, href) => {
     e.preventDefault();
+    isNavigatingRef.current = true;
     document.body.classList.remove('scroll-locked');
     const mainContent = document.getElementById('main-content');
     if (mainContent) mainContent.removeAttribute('inert');

@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function ScrollProgressBar() {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef(null);
 
   useEffect(() => {
     let ticking = false;
@@ -12,9 +12,10 @@ export default function ScrollProgressBar() {
       if (!ticking) {
         requestAnimationFrame(() => {
           const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          if (docHeight > 0) {
-            const current = (window.scrollY / docHeight) * 100;
-            setProgress(Math.min(100, Math.max(0, current)));
+          if (docHeight > 0 && barRef.current) {
+            const current = Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100));
+            barRef.current.style.transform = `scaleX(${current / 100})`;
+            barRef.current.setAttribute('aria-valuenow', Math.round(current));
           }
           ticking = false;
         });
@@ -30,22 +31,25 @@ export default function ScrollProgressBar() {
 
   return (
     <div
+      ref={barRef}
       className="scroll-progress-bar"
       role="progressbar"
       aria-label="Reading progress"
-      aria-valuenow={Math.round(progress)}
+      aria-valuenow={0}
       aria-valuemin={0}
       aria-valuemax={100}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
+        width: '100%',
         height: '2px',
-        width: `${progress}%`,
         backgroundColor: 'var(--accent, #ff630f)',
         zIndex: 9999,
         pointerEvents: 'none',
-        transition: 'width 0.1s linear'
+        transform: 'scaleX(0)',
+        transformOrigin: 'left',
+        willChange: 'transform'
       }}
     />
   );

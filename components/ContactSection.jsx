@@ -6,6 +6,7 @@ import { PERSONA } from '../data/portfolio';
 export default function ContactSection() {
   const [copyStatus, setCopyStatus] = useState('');
   const [copyStatusType, setCopyStatusType] = useState('idle');
+  const [isCopied, setIsCopied] = useState(false);
 
   const currentYear = new Date().getFullYear();
 
@@ -20,10 +21,12 @@ export default function ContactSection() {
       await navigator.clipboard.writeText(PERSONA.email);
       setCopyStatusType('success');
       setCopyStatus('Email address copied to clipboard.');
+      setIsCopied(true);
       setTimeout(() => {
         setCopyStatus('');
         setCopyStatusType('idle');
-      }, 4000);
+        setIsCopied(false);
+      }, 3000);
     } catch {
       setCopyStatusType('manual');
       setCopyStatus(`Copy failed. Please copy ${PERSONA.email} manually.`);
@@ -80,11 +83,11 @@ export default function ContactSection() {
 
             <button
               type="button"
-              className="copy-email-btn"
+              className={`copy-email-btn ${isCopied ? 'is-copied' : ''}`}
               onClick={handleCopyEmail}
               aria-label="Copy email address to clipboard"
             >
-              Copy email
+              {isCopied ? 'Copied ✓' : 'Copy email'}
             </button>
           </div>
 

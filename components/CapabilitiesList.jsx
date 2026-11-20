@@ -84,7 +84,11 @@ export default function CapabilitiesList() {
               style={{ '--row-delay': `${idx * 85}ms` }}
               role="listitem"
             >
-              <div className="capability-row-summary">
+              <div
+                className="capability-row-summary"
+                onClick={() => toggleService(service.id)}
+                style={{ cursor: 'pointer' }}
+              >
                 <span className="cap-idx">{service.id}</span>
                 <span className="cap-title">{service.title}</span>
                 <span className="cap-scope">{service.scope}</span>
@@ -96,7 +100,10 @@ export default function CapabilitiesList() {
                     aria-expanded={isExpanded}
                     aria-controls={panelId}
                     className="btn-disclosure"
-                    onClick={() => toggleService(service.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleService(service.id);
+                    }}
                     aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${service.title} details`}
                   >
                     <span>{isExpanded ? 'Close −' : 'Explore +'}</span>

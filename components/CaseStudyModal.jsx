@@ -80,16 +80,8 @@ export default function CaseStudyModal({
   }, [isOpen, nextProject, prevProject, onSelectProject]);
 
   const handleDialogClick = (e) => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    const rect = dialog.getBoundingClientRect();
-    const isInDialog =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
-
-    if (!isInDialog) {
+    // Only close if user clicked directly on the dialog backdrop, not inside the modal content or scrollbar
+    if (e.target === dialogRef.current) {
       handleSafeClose();
     }
   };

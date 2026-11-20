@@ -134,14 +134,16 @@ export default function FeaturedProject({ onOpenModal }) {
           >
             View case study ↗
           </button>
-          <a
-            href="https://student-e-library.netlify.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="featured-live-link"
-          >
-            Visit live site ↗
-          </a>
+          {projectData.liveUrl && (
+            <a
+              href={projectData.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="featured-live-link"
+            >
+              Visit live site ↗
+            </a>
+          )}
         </div>
       </div>
     </section>
