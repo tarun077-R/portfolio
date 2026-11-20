@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import PageLoader from './PageLoader';
 import HeroSection from './HeroSection';
 import ApproachStatement from './ApproachStatement';
 import FeaturedProject from './FeaturedProject';
@@ -10,14 +11,20 @@ import CapabilitiesList from './CapabilitiesList';
 import WorkExperience from './WorkExperience';
 import TechnicalSkills from './TechnicalSkills';
 import ContactSection from './ContactSection';
+import { SkeletonCard } from './Skeleton';
 
-// Ponytail dynamic code-splitting: load overlay and modal only when requested
+// Ponytail dynamic code-splitting: load overlay and modal only when requested with shimmer fallbacks
 const NavigationOverlay = dynamic(() => import('./NavigationOverlay'), {
   ssr: false
 });
 
 const CaseStudyModal = dynamic(() => import('./CaseStudyModal'), {
-  ssr: false
+  ssr: false,
+  loading: () => (
+    <div className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-6 backdrop-blur-sm">
+      <SkeletonCard className="w-full max-w-2xl h-[480px]" />
+    </div>
+  )
 });
 
 export default function PortfolioView() {
@@ -51,6 +58,9 @@ export default function PortfolioView() {
 
   return (
     <>
+      {/* Editorial Page Loader & Asset Shimmer */}
+      <PageLoader />
+
       {/* Navigation Overlay (outside main for clean modal inertness) */}
       <NavigationOverlay
         isOpen={isNavOpen}

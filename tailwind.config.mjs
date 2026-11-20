@@ -28,6 +28,20 @@ export default {
         'inset-standard': 'var(--inset-standard, 3%)',
         'inset-work': 'var(--inset-work, 4.5%)',
       },
+      keyframes: {
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        pulseGlow: {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '0.9' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 2.2s infinite ease-in-out',
+        'pulse-glow': 'pulseGlow 2.5s infinite ease-in-out',
+      },
     },
   },
   plugins: [],
