@@ -1,66 +1,71 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const STATUS_MESSAGES = [
-  'INITIALIZING SYSTEM',
-  'LOADING ASSETS & SHADERS',
-  'CONFIGURING VIEWPORT',
-  'READY'
-];
-
-export default function PageLoader({ onComplete = () => {} }) {
+export default function PageLoader() {
   const [progress, setProgress] = useState(0);
-  const [statusIdx, setStatusIdx] = useState(0);
+  const [status, setStatus] = useState('INITIALIZING SYSTEM');
   const [isExiting, setIsExiting] = useState(false);
-  const [isRemoved, setIsRemoved] = useState(false);
+  const [isDestroyed, setIsDestroyed] = useState(false);
+  const timerRef = useRef(null);
 
   useEffect(() => {
-    // Check if user prefers reduced motion
+    // Respect reduced motion
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) {
-      setIsRemoved(true);
-      onComplete();
+      setIsDestroyed(true);
       return;
     }
 
-    // Smooth simulated asset loading progress
-    let current = 0;
-    const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 8) + 4;
-      if (current >= 100) {
-        current = 100;
-        clearInterval(interval);
-        setProgress(100);
-        setStatusIdx(STATUS_MESSAGES.length - 1);
+    const startTime = performance.now();
+    const duration = 1400; // 1.4s smooth loader time
 
-        // Pause briefly at 100% before elegant curtain reveal
+    function step(now) {
+      const elapsed = now - startTime;
+      const rawProgress = Math.min(1, elapsed / duration);
+      // Smooth cubic ease-out
+      const eased = 1 - Math.pow(1 - rawProgress, 2.5);
+      const currentPct = Math.round(eased * 100);
+
+      setProgress(currentPct);
+
+      if (currentPct >= 100) {
+        setStatus('READY');
         setTimeout(() => {
           setIsExiting(true);
-          onComplete();
           setTimeout(() => {
-            setIsRemoved(true);
-          }, 850);
-        }, 180);
-      } else {
-        setProgress(current);
-        if (current > 65) setStatusIdx(2);
-        else if (current > 30) setStatusIdx(1);
+            setIsDestroyed(true);
+          }, 750);
+        }, 150);
+        return;
       }
-    }, 38);
 
-    return () => clearInterval(interval);
-  }, [onComplete]);
+      if (currentPct >= 70) {
+        setStatus('CONFIGURING VIEWPORT');
+      } else if (currentPct >= 30) {
+        setStatus('LOADING ASSETS & SHADERS');
+      }
 
-  if (isRemoved) return null;
+      timerRef.current = requestAnimationFrame(step);
+    }
+
+    timerRef.current = requestAnimationFrame(step);
+
+    return () => {
+      if (timerRef.current) cancelAnimationFrame(timerRef.current);
+    };
+  }, []);
+
+  if (isDestroyed) return null;
 
   return (
     <aside
-      className={`fixed inset-0 z-[99999] flex flex-col justify-between bg-[#000000] text-white p-6 md:p-12 transition-transform duration-800 pointer-events-auto select-none ${
-        isExiting ? '-translate-y-full' : 'translate-y-0'
+      className={`fixed inset-0 z-[99999] flex flex-col justify-between bg-[#000000] text-white p-6 md:p-12 transition-transform duration-700 select-none ${
+        isExiting ? '-translate-y-full pointer-events-none' : 'translate-y-0 pointer-events-auto'
       }`}
       style={{
-        transitionTimingFunction: 'cubic-bezier(0.76, 0, 0.24, 1)'
+        transitionTimingFunction: 'cubic-bezier(0.76, 0, 0.24, 1)',
+        willChange: 'transform'
       }}
       role="status"
       aria-label="Loading portfolio"
@@ -70,31 +75,24 @@ export default function PageLoader({ onComplete = () => {} }) {
         <span className="font-utility text-xs tracking-[0.2em] text-[#888888] uppercase">
           TARUN RAWAT / 2026
         </span>
-        <span className="font-utility text-xs tracking-[0.15em] text-[#ff630f] uppercase">
-          {STATUS_MESSAGES[statusIdx]}
+        <span className="font-utility text-xs tracking-[0.15em] text-[#ff630f] uppercase font-medium">
+          {status}
         </span>
       </div>
 
-      {/* Center Monogram / Editorial Title with Shimmer */}
-      <div className="flex flex-col items-center justify-center my-auto text-center">
-        <div className="relative overflow-hidden mb-4">
-          <h1 className="font-display text-5xl md:text-8xl font-medium tracking-tight text-white">
-            TARUN RAWAT
-          </h1>
-          {/* Subtle Accent Glow behind title */}
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ff630f]/15 to-transparent -translate-x-full animate-shimmer pointer-events-none"
-            aria-hidden="true"
-          />
-        </div>
+      {/* Center Monogram / Editorial Title */}
+      <div className="flex flex-col items-center justify-center my-auto text-center w-full">
+        <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tight text-white mb-4 w-full">
+          TARUN RAWAT
+        </h1>
 
-        <p className="font-utility text-xs md:text-sm tracking-[0.18em] text-[#888888] uppercase max-w-md">
+        <p className="font-utility text-xs md:text-sm tracking-[0.18em] text-[#888888] uppercase max-w-lg">
           Full-Stack Web Developer &amp; Digital Designer
         </p>
       </div>
 
-      {/* Bottom Progress Bar & Percentage */}
-      <div className="flex flex-col gap-3 w-full max-w-xl mx-auto">
+      {/* Bottom Progress Bar & Percentage (Full Width) */}
+      <div className="flex flex-col gap-3 w-full">
         <div className="flex justify-between items-baseline font-utility text-xs text-[#aaaaaa]">
           <span className="tracking-widest">LOADING EXPERIENCE</span>
           <span className="font-mono text-sm font-semibold text-white tabular-nums">
@@ -102,7 +100,7 @@ export default function PageLoader({ onComplete = () => {} }) {
           </span>
         </div>
 
-        {/* Shimmer Progress Track */}
+        {/* Shimmer Progress Track (Full Width) */}
         <div className="w-full h-[2px] bg-[#1a1a1a] rounded-full overflow-hidden relative">
           <div
             className="h-full bg-[#ff630f] transition-all duration-75 ease-out relative"
@@ -110,7 +108,7 @@ export default function PageLoader({ onComplete = () => {} }) {
           >
             {/* Shimmer pulse across active progress */}
             <div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full animate-shimmer"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full animate-shimmer"
               aria-hidden="true"
             />
           </div>
